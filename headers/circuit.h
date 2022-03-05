@@ -1,15 +1,15 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:59:44
- * @LastEditTime: 2022-03-05 09:13:56
- * @FilePath: \QCNN\headers\circuit.h
+ * @LastEditTime: 2022-03-05 15:04:34
+ * @FilePath: \QCNN-robustness-verifier\headers\circuit.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
 #ifndef _CIRCUIT_H
 #define _CIRCUIT_H
 
-#include"../headers/gate.h"
+#include"gate.h"
 
 #include<iostream>
 #include<cstdio>

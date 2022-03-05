@@ -1,47 +1,21 @@
 /*
  * @Author: SuBonan
- * @Date: 2022-03-05 09:31:13
- * @LastEditTime: 2022-03-05 10:01:52
- * @FilePath: \QCNN\main.cpp
+ * @Date: 2022-03-05 15:31:08
+ * @LastEditTime: 2022-03-05 16:14:23
+ * @FilePath: \QCNN-robustness-verifier\main.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
 #include"./headers/circuit.h"
-#include"./headers/simustate.h"
+#include"./headers/purestate.h"
+#include"./headers/state.h"
+#include<iostream>
+using namespace std;
 
 int main(){
-    vector<vector<double> > images;
-    freopen("images.txt", "r", stdin);
-    int n, m;  cin >> n >> m;
-    for (int i = 0;i < n;i++){
-        vector<double> rua;
-        for (int j = 0;j < m;j++){
-            double d;   cin >> d;
-            rua.push_back(d);
-        }
-        images.push_back(rua);
-    }
-    fclose(stdin);
-    Circuit c = Circuit(8);
-    cout << "Predict:" << endl;
-    for (int i = 0;i < 3;i++){
-        for (int j = 0;j < 3;j++){
-            SimuStates a = SimuStates(8, images[i * 3 + j]);
-            a.apply_circuit(c);
-            cout << a.predict() << " ";
-        }
-        cout<<endl;
-    }
-    cout << "Real Number:" << endl;
-    fclose(stdin);
-    freopen("labels.txt", "r", stdin);
-    int a;  cin >> a; cin >> a;
-    for (int i = 0;i < 3;i++){
-        for (int j = 0;j < 3;j++){
-            cin >> a;
-            cout << a << " ";
-        }
-        cout<<endl;
-    }
-    fclose(stdin);
-}   
+    PureState q0 = PureState(2, vector<double>{1, 0, 0, 0});
+    PureState q1 = PureState(2, vector<double>{0.5, 0.5, 0.5, 0.5});
+    State rho = State(2, vector<pair<double, PureState> >{make_pair(0.3, q0), make_pair(0.7, q1)});
+    cout << rho.density_operator() << endl;
+    return 0;
+}

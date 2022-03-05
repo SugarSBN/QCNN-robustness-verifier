@@ -1,8 +1,8 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:17:37
- * @LastEditTime: 2022-03-05 09:26:45
- * @FilePath: \QCNN\headers\simustate.h
+ * @LastEditTime: 2022-03-05 15:26:23
+ * @FilePath: \QCNN-robustness-verifier\headers\purestate.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
@@ -14,14 +14,14 @@
 #include<algorithm>
 #include<map>
 #include<iostream>
-#include"../headers/complex.h"
-#include"../headers/gate.h"
-#include"../headers/matrix.h"
-#include"../headers/circuit.h"
+#include"complex.h"
+#include"gate.h"
+#include"matrix.h"
+#include"circuit.h"
 
 using namespace std;
 
-class SimuStates{
+class PureState{
     /*
         (states : vector<pair<Complex, string> >) is the quantum states, e.g [(1/sqrt(2), "¦0⟩"), (1/sqrt(2), "¦1⟩")]
         (nqubits : int)                           is the number of qubits of the state.
@@ -32,7 +32,7 @@ class SimuStates{
         string toString(int n) const;
 
     public:
-        SimuStates(int nnqubits, vector<double> value);
+        PureState(int nnqubits, vector<double> value);
 
         int size() const;
 
@@ -42,6 +42,10 @@ class SimuStates{
 
         int predict() const;
         
-        friend ostream & operator << (ostream &os, SimuStates A);
+        double measure() const;
+
+        Matrix to_vector() const;
+        
+        friend ostream & operator << (ostream &os, PureState A);
 };
 #endif

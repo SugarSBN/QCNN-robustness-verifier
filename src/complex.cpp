@@ -1,12 +1,13 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:47:38
- * @LastEditTime: 2022-03-05 08:55:02
- * @FilePath: \QCNN\src\complex.cpp
+ * @LastEditTime: 2022-03-05 15:55:49
+ * @FilePath: \QCNN-robustness-verifier\src\complex.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
 #include"../headers/complex.h"
+#include <iomanip>
 
 Complex :: Complex(double nreal, double nimage){
     real = nreal; image = nimage;
@@ -27,7 +28,7 @@ Complex operator + (const Complex &A, const Complex &B){
 }
 
 ostream & operator << (ostream &os, const Complex &A){
-    os << "(" << A.real << " + " << A.image << "i)";
+    os << "(" << setw(5) << A.real << " + " << setw(5) << A.image << "i)";
     return os;
 }
 
@@ -37,4 +38,8 @@ bool operator < (const Complex &A, const Complex &B){
 
 double Complex :: norm() const{
     return sqrt(real * real + image * image);
+}
+
+Complex Complex :: dagger() const{
+    return Complex(real, -image);
 }

@@ -1,26 +1,43 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:55:36
- * @LastEditTime: 2022-03-05 08:58:29
- * @FilePath: \QCNN\headers\matrix.h
+ * @LastEditTime: 2022-03-05 16:02:38
+ * @FilePath: \QCNN-robustness-verifier\headers\matrix.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
 #ifndef _MATRIX_H
 #define _MATRIX_H
-#include"../headers/complex.h"
-#include"../headers/gate.h"
-
+#include<vector>
+#include"complex.h"
+#include"gate.h"
+using namespace std;
 class Matrix{
     private:
-        Complex v[2][2];
+        int w, h;
+        vector<vector<Complex> > v;
     public:
-        Complex* operator [] (int n);
+        vector<Complex> operator [] (int n);
 
         void print() const;
 
+        void set_value(int i, int j, Complex c);
+
         Matrix(){}
+        
+        Matrix(int nh, int nw);
+
         Matrix(Gate G, double alpha = 0);
+
+        Matrix dagger() const;
+
+        friend Matrix operator * (Matrix A, Matrix B);
+
+        friend Matrix operator * (double p, Matrix B);
+
+        friend Matrix operator + (Matrix A, Matrix B);
+
+        friend ostream & operator << (ostream &os, Matrix A);
 };
 
 #endif

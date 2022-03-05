@@ -1,18 +1,18 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:19:29
- * @LastEditTime: 2022-03-05 09:29:30
- * @FilePath: \QCNN\src\simustate.cpp
+ * @LastEditTime: 2022-03-05 15:54:00
+ * @FilePath: \QCNN-robustness-verifier\src\PureState.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
-#include"../headers/simustate.h"
+#include"../headers/purestate.h"
 
-int SimuStates :: size() const{
+int PureState :: size() const{
     return states.size();
 }
 
-string SimuStates :: toString(int n) const{
+string PureState :: toString(int n) const{
     string res = "";
     for (int i = 0;i < nqubits;i++){
         res = (n % 2 ? '1' : '0') + res;
@@ -22,18 +22,19 @@ string SimuStates :: toString(int n) const{
     return res;
 }
 
-SimuStates::SimuStates(int nnqubits, vector<double> value){
+PureState::PureState(int nnqubits, vector<double> value){
     nqubits = nnqubits;
-    if (value.size() != 256){
+    states.clear();
+    if (value.size() != (1 << nqubits)){
         states.push_back(make_pair(Complex(1, 0), toString(0)));
         return;
     }
-    for (int i = 0;i < 256;i++){
+    for (int i = 0;i < (1 << nqubits);i++){
         states.push_back(make_pair(Complex(value[i], 0), toString(i)));
     }
 }
 
-void SimuStates::apply_operator(Operator G){
+void PureState::apply_operator(Operator G){
     vector<pair<Complex, string> > new_states;
     map<string, Complex> mapping;
     
@@ -72,24 +73,34 @@ void SimuStates::apply_operator(Operator G){
     states = new_states;
 }
 
-void SimuStates::apply_circuit(Circuit c){
+void PureState::apply_circuit(Circuit c){
     auto operators = c.get_operators();
     for (int i = 0;i < operators.size();i++){
         apply_operator(operators[i]);
     }
 }
 
-int SimuStates::predict() const{
+double PureState :: measure() const{
     double zero, one;
     for (int i = 0;i < states.size();i++){
         double prob = states[i].first.norm() * states[i].first.norm();
         if (states[i].second[nqubits - 1] == '0') zero += prob;
         else one += prob;
     }
-    return zero > one ? 0 : 1;
+    return one;
 }
 
-ostream & operator << (ostream &os, SimuStates A){
+int PureState::predict() const{
+    return measure() < 0.5 ? 0 : 1;
+}
+
+Matrix PureState :: to_vector() const{
+    Matrix res = Matrix((1 << nqubits), 1);
+    for (int i = 0;i < states.size();i++)      res.set_value(i, 0, states[i].first);
+    return res;
+}
+
+ostream & operator << (ostream &os, PureState A){
     for (int i = 0;i < A.size();i++) if (fabs(A.states[i].first.get_real()) > 1e-10 || fabs(A.states[i].first.get_image()) > 1e-10){
         os << A.states[i].first << "|" << A.states[i].second << "> " << (i == A.size() - 1 ? "" : "+\n");
     }

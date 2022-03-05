@@ -1,14 +1,20 @@
-objects = main.o \
-		src/circuit.o \
+objects = src/circuit.o \
 		src/complex.o \
 		src/matrix.o \
-		src/simustate.o \
+		src/purestate.o \
+		src/state.o \
 
-main : $(objects)
-	g++ $(objects) -o $@
+main : $(objects) main.o
+	g++ $(objects) main.o -o $@
 
 main.o : main.cpp
 	g++ main.cpp -c
+
+predict : $(objects) predict.o
+	g++ $(objects) predict.o -o $@
+
+predict.o : predict.cpp
+	g++ predict.cpp -c
 
 /src/%.o : /src/%.cpp
 	g++ $< -c
