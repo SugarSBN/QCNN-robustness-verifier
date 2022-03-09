@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 15:31:08
- * @LastEditTime: 2022-03-05 16:14:23
+ * @LastEditTime: 2022-03-07 18:32:34
  * @FilePath: \QCNN-robustness-verifier\main.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -13,9 +13,13 @@
 using namespace std;
 
 int main(){
-    PureState q0 = PureState(2, vector<double>{1, 0, 0, 0});
-    PureState q1 = PureState(2, vector<double>{0.5, 0.5, 0.5, 0.5});
-    State rho = State(2, vector<pair<double, PureState> >{make_pair(0.3, q0), make_pair(0.7, q1)});
-    cout << rho.density_operator() << endl;
+    vector<double> v;
+    for (int i = 0; i < (1 << 8);i++)   v.push_back(0);
+    v[0] = 1;
+    State q = State(2, vector<pair<double, PureState> > {
+        make_pair(1, PureState(2, vector<Complex>{Complex(0.5, 0.5), Complex(0, 0), Complex(0.5, -0.5), Complex(0, 0)})),
+        });
+
+    q.standardize();
     return 0;
 }

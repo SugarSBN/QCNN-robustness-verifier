@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:47:02
- * @LastEditTime: 2022-03-05 15:52:53
+ * @LastEditTime: 2022-03-07 16:32:16
  * @FilePath: \QCNN-robustness-verifier\headers\complex.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -28,6 +28,8 @@ class Complex{
         friend Complex operator * (const Complex &A, const Complex &B);
 
         friend Complex operator + (const Complex &A, const Complex &B);
+
+        friend Complex operator - (const Complex &A, const Complex &B);
 
         friend ostream & operator << (ostream &os, const Complex &A);
 

@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:56:23
- * @LastEditTime: 2022-03-05 16:11:32
+ * @LastEditTime: 2022-03-07 17:13:24
  * @FilePath: \QCNN-robustness-verifier\src\matrix.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -29,7 +29,7 @@ Matrix :: Matrix(int nh, int nw){
     }
 }
 Matrix :: Matrix(Gate G, double alpha) {
-    Matrix(2, 2);
+    new (this) Matrix(2, 2);
     if (G == H){
         for (int i = 0;i < 2;i++)   for (int j = 0;j < 2;j++)   v[i][j] = Complex(1.0 / sqrt(2), 0);
         v[1][1] = v[1][1] * Complex(-1, 0);
@@ -72,6 +72,12 @@ Matrix Matrix :: dagger() const{
     return res;
 }
 
+Complex Matrix :: trace() const{
+    Complex res = Complex(0, 0);
+    for (int i = 0;i < h;i++)   res = res + v[i][i];
+    return res;
+}
+
 Matrix operator * (Matrix A, Matrix B){
     Matrix res = Matrix(A.h, B.w);
     for (int i = 0;i < A.h;i++)
@@ -94,6 +100,17 @@ Matrix operator + (Matrix A, Matrix B){
     for (int i = 0;i < A.h;i++)
         for (int j = 0;j < B.w;j++)
             res.set_value(i, j, A[i][j] + B[i][j]);
+    return res;
+}
+
+Matrix operator ^ (Matrix A, Matrix B){
+    Matrix res = Matrix(A.h * B.h, A.w * B.w);
+    for (int x1 = 0;x1 < A.h;x1++)
+        for (int y1 = 0;y1 < A.w;y1++)
+            for (int x2 = 0;x2 < B.h;x2++)
+                for (int y2 = 0;y2 < B.w;y2++){
+                    res.set_value(x1 * B.h + x2, y1 * B.w + y2, A[x1][y1] * B[x2][y2]);
+                }
     return res;
 }
 

@@ -1,8 +1,8 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:19:29
- * @LastEditTime: 2022-03-05 15:54:00
- * @FilePath: \QCNN-robustness-verifier\src\PureState.cpp
+ * @LastEditTime: 2022-03-07 18:28:57
+ * @FilePath: \QCNN-robustness-verifier\src\purestate.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
  */
@@ -33,6 +33,19 @@ PureState::PureState(int nnqubits, vector<double> value){
         states.push_back(make_pair(Complex(value[i], 0), toString(i)));
     }
 }
+
+PureState::PureState(int nnqubits, vector<Complex> value){
+    nqubits = nnqubits;
+    states.clear();
+    if (value.size() != (1 << nqubits)){
+        states.push_back(make_pair(Complex(1, 0), toString(0)));
+        return;
+    }
+    for (int i = 0;i < (1 << nqubits);i++){
+        states.push_back(make_pair(value[i], toString(i)));
+    }
+}
+
 
 void PureState::apply_operator(Operator G){
     vector<pair<Complex, string> > new_states;

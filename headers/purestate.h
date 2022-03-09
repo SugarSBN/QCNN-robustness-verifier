@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:17:37
- * @LastEditTime: 2022-03-05 15:26:23
+ * @LastEditTime: 2022-03-07 18:28:35
  * @FilePath: \QCNN-robustness-verifier\headers\purestate.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -33,6 +33,8 @@ class PureState{
 
     public:
         PureState(int nnqubits, vector<double> value);
+        
+        PureState(int nnqubits, vector<Complex> value);
 
         int size() const;
 

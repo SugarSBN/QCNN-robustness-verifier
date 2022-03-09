@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:47:38
- * @LastEditTime: 2022-03-05 15:55:49
+ * @LastEditTime: 2022-03-07 16:32:33
  * @FilePath: \QCNN-robustness-verifier\src\complex.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -25,6 +25,10 @@ Complex operator * (const Complex &A, const Complex &B){
 
 Complex operator + (const Complex &A, const Complex &B){
     return Complex(A.real + B.real, A.image + B.image);
+}
+
+Complex operator - (const Complex &A, const Complex &B){
+    return Complex(A.real - B.real, A.image - B.image);
 }
 
 ostream & operator << (ostream &os, const Complex &A){

@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 15:02:57
- * @LastEditTime: 2022-03-05 16:29:17
+ * @LastEditTime: 2022-03-07 19:42:45
  * @FilePath: \QCNN-robustness-verifier\headers\state.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -30,6 +30,8 @@ class State{
 
         Matrix bloch_vector() const;
         
+        double fidelity(State q) const;
+
         friend ostream & operator << (ostream &os, PureState A);        
 };
 #endif

@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:55:36
- * @LastEditTime: 2022-03-05 16:02:38
+ * @LastEditTime: 2022-03-07 16:06:12
  * @FilePath: \QCNN-robustness-verifier\headers\matrix.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -31,11 +31,15 @@ class Matrix{
 
         Matrix dagger() const;
 
+        Complex trace() const;
+
         friend Matrix operator * (Matrix A, Matrix B);
 
         friend Matrix operator * (double p, Matrix B);
 
         friend Matrix operator + (Matrix A, Matrix B);
+
+        friend Matrix operator ^ (Matrix A, Matrix B);      // tensor product
 
         friend ostream & operator << (ostream &os, Matrix A);
 };
