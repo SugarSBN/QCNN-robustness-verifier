@@ -3,6 +3,7 @@ objects = src/circuit.o \
 		src/matrix.o \
 		src/purestate.o \
 		src/state.o \
+		src/polygon.o \
 
 main : $(objects) main.o
 	g++ $(objects) main.o -o $@

@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:17:37
- * @LastEditTime: 2022-03-07 18:28:35
+ * @LastEditTime: 2022-03-09 18:51:23
  * @FilePath: \QCNN-robustness-verifier\headers\purestate.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -32,6 +32,8 @@ class PureState{
         string toString(int n) const;
 
     public:
+        PureState(){}
+        
         PureState(int nnqubits, vector<double> value);
         
         PureState(int nnqubits, vector<Complex> value);
@@ -48,6 +50,8 @@ class PureState{
 
         Matrix to_vector() const;
         
+        double fidelity(PureState q) const;
+
         friend ostream & operator << (ostream &os, PureState A);
 };
 #endif

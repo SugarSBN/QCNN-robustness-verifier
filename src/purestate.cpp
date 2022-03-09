@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:19:29
- * @LastEditTime: 2022-03-07 18:28:57
+ * @LastEditTime: 2022-03-09 15:24:02
  * @FilePath: \QCNN-robustness-verifier\src\purestate.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -119,3 +119,8 @@ ostream & operator << (ostream &os, PureState A){
     }
     return os;
 };
+
+double PureState :: fidelity(PureState q) const{
+    Complex dot = (to_vector().dagger() * q.to_vector())[0][0];
+    return (dot.dagger() * dot).get_real();
+}

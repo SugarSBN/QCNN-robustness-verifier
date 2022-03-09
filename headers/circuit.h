@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:59:44
- * @LastEditTime: 2022-03-05 15:04:34
+ * @LastEditTime: 2022-03-09 18:51:43
  * @FilePath: \QCNN-robustness-verifier\headers\circuit.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -48,6 +48,8 @@ class Circuit{
         vector<Operator> operators;
         int nqubits;
     public:
+        Circuit(){}
+        
         Circuit(int nnqubits);
 
         friend ostream & operator << (ostream &os, const Circuit &A);

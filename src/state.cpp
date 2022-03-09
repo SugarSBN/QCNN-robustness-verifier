@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 15:06:56
- * @LastEditTime: 2022-03-07 18:47:44
+ * @LastEditTime: 2022-03-09 14:33:48
  * @FilePath: \QCNN-robustness-verifier\src\state.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -62,7 +62,3 @@ Matrix State :: bloch_vector() const{
     return res;
 }
 
-
-double State :: fidelity(State q) const{
-    
-}
