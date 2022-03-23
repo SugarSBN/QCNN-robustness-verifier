@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-09 18:33:20
- * @LastEditTime: 2022-03-09 19:23:18
+ * @LastEditTime: 2022-03-23 11:41:28
  * @FilePath: \QCNN-robustness-verifier\src\polygon.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -39,4 +39,18 @@ vector<bool> Polygon :: verify(int ans){
         res.push_back(tmp.predict() == ans);
     }
     return res;
+}
+
+double Polygon :: robust_bound() const{
+    double res = 0;
+    for (int i = 0;i < points.size() - 1;i++)   res = max(res, cal(i, i + 1));
+    res = max(res, cal(0, points.size() - 1));
+    return 1 - (1 + ((1 << nqubits) - 1) * res) / (1 << nqubits);
+}
+
+double Polygon :: cal(int i, int j) const{
+    double costheta1 = ((1 << nqubits) * center_state.fidelity(points[i]) - 1) / ((1 << nqubits) - 1);
+    double costheta2 = ((1 << nqubits) * center_state.fidelity(points[j]) - 1) / ((1 << nqubits) - 1);
+
+    return max(costheta1, costheta2) * sqrt(2);
 }

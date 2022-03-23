@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 15:31:08
- * @LastEditTime: 2022-03-09 19:26:59
+ * @LastEditTime: 2022-03-23 15:17:01
  * @FilePath: \QCNN-robustness-verifier\main.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -11,6 +11,7 @@
 #include"./headers/purestate.h"
 #include"./headers/state.h"
 #include"./headers/polygon.h"
+#include"./headers/verifier.h"
 #include<iostream>
 
 using namespace std;
@@ -27,17 +28,18 @@ int main(){
         }
         images.push_back(tmp);
     }
-    Circuit c = Circuit(8);
-    PureState q = PureState(8, images[0]);
+    for (int i = 0;i < 10;i++){
+        Circuit c = Circuit(8);
+        PureState q = PureState(8, images[i]);
+        Verifier v = Verifier(c, q, 8);
+        v.work();
+        q.apply_circuit(c);
 
-//    Polygon p = Polygon(q, 8, c, 1.0);
-    Polygon p = Polygon(q, 8, c, 1.3);
-//    Polygon p = Polygon(q, 8, c, 1.5);  // 1 0 0 1
-//    Polygon p = Polygon(q, 8, c, 2.0);
-    
-    q.apply_circuit(c);
-    int cls = q.predict();
-    vector<bool> ans = p.verify(cls);
-    for (int i = 0;i < ans.size();i++)  cout << ans[i] << endl;
+        printf("%d:\n", i);
+        printf("Guan's robust bound: %lf\n", q.robust_boundary_guan());
+        if (v.random_sampling_check(100))   printf("Verified\n");
+        //cout << i << ": " << q.robust_boundary_guan() << " " << v.get_robust_bound() << endl;
+    }
+   
     return 0;
 }

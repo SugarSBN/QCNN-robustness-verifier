@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 09:17:37
- * @LastEditTime: 2022-03-09 18:51:23
+ * @LastEditTime: 2022-03-16 09:53:05
  * @FilePath: \QCNN-robustness-verifier\headers\purestate.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -14,6 +14,7 @@
 #include<algorithm>
 #include<map>
 #include<iostream>
+#include<queue>
 #include"complex.h"
 #include"gate.h"
 #include"matrix.h"
@@ -44,7 +45,11 @@ class PureState{
 
         void apply_circuit(Circuit c);
 
+        Matrix bloch_vector() const;
+        
         int predict() const;
+
+        double robust_boundary_guan() const;
         
         double measure() const;
 

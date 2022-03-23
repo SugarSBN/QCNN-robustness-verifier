@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 08:55:36
- * @LastEditTime: 2022-03-07 16:06:12
+ * @LastEditTime: 2022-03-16 08:41:59
  * @FilePath: \QCNN-robustness-verifier\headers\matrix.h
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -14,9 +14,10 @@
 using namespace std;
 class Matrix{
     private:
-        int w, h;
         vector<vector<Complex> > v;
     public:
+        int w, h;
+        
         vector<Complex> operator [] (int n);
 
         void print() const;

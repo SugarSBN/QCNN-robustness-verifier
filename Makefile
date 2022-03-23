@@ -4,6 +4,7 @@ objects = src/circuit.o \
 		src/purestate.o \
 		src/state.o \
 		src/polygon.o \
+		src/verifier.o \
 
 main : $(objects) main.o
 	g++ $(objects) main.o -o $@
