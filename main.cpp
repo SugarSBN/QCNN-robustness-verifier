@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-05 15:31:08
- * @LastEditTime: 2022-03-23 15:17:01
+ * @LastEditTime: 2022-03-24 10:20:34
  * @FilePath: \QCNN-robustness-verifier\main.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -38,6 +38,7 @@ int main(){
         printf("%d:\n", i);
         printf("Guan's robust bound: %lf\n", q.robust_boundary_guan());
         if (v.random_sampling_check(100))   printf("Verified\n");
+        else printf("not verified!\n");
         //cout << i << ": " << q.robust_boundary_guan() << " " << v.get_robust_bound() << endl;
     }
    

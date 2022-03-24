@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-17 11:49:14
- * @LastEditTime: 2022-03-23 15:40:30
+ * @LastEditTime: 2022-03-24 10:21:11
  * @FilePath: \QCNN-robustness-verifier\src\verifier.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -41,8 +41,11 @@ double Verifier :: get_robust_bound() const{
 bool Verifier :: random_sampling_check(int samples) const{
     srand((int) time (NULL));
     PureState nq = q;
+    
     printf("Robust bound: %.4lf\n", robust_bound);
+    if (robust_bound <= 0)  return 1;
     for (int t = 0;t < samples;t++){
+
         double phi = (double)rand() / (double)RAND_MAX * 7;
         int tg = rand() % nqubits;
         int gate = rand() % 3;
@@ -50,7 +53,9 @@ bool Verifier :: random_sampling_check(int samples) const{
         Gate g = gate == 0 ? RX : (gate == 1 ? RY : RZ);
         nq.apply_operator(Operator(g, tg, vector<int>{}, phi));
         distance = 1 - q.fidelity(nq);
+
         while(1 - q.fidelity(nq) > robust_bound || distance < (robust_bound - 0.01)){
+
             phi = (double)rand() / (double)RAND_MAX * 7;
             tg = rand() % nqubits;
             gate = rand() % 3;

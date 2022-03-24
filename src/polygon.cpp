@@ -1,7 +1,7 @@
 /*
  * @Author: SuBonan
  * @Date: 2022-03-09 18:33:20
- * @LastEditTime: 2022-03-23 11:41:28
+ * @LastEditTime: 2022-03-24 09:50:37
  * @FilePath: \QCNN-robustness-verifier\src\polygon.cpp
  * @Github: https://github.com/SugarSBN
  * これなに、これなに、これない、これなに、これなに、これなに、ねこ！ヾ(*´∀｀*)ﾉ
@@ -54,3 +54,4 @@ double Polygon :: cal(int i, int j) const{
 
     return max(costheta1, costheta2) * sqrt(2);
 }
+
